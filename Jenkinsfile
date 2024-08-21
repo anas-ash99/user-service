@@ -19,8 +19,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying application...'
-                // Add your deployment commands here
-                // Example: sh 'scp -r ./build user@server:/path/to/deploy'
+
             }
         }
     }
