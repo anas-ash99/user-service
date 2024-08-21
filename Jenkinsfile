@@ -49,7 +49,9 @@ pipeline {
     post {
         always {
             echo 'Cleaning up...'
-            cleanWs()
+            node {
+                cleanWs()
+            }
         }
         success {
             echo 'Build and deployment succeeded!'
