@@ -1,0 +1,13 @@
+# service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  selector:
+    app: user-service
+  ports:
+    - protocol: TCP
+      port: 80  # The port on the service
+      targetPort: 5000  # The port on the container (Node.js app)
+  type: LoadBalancer  # For exposing it externally (optional, depending on your environment)
