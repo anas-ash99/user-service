@@ -1,6 +1,11 @@
 pipeline {
     agent any
-
+    environment {
+        // Replace these with your Docker Hub credentials and repository info
+        DOCKER_HUB_CREDENTIALS = 'aba091eb-3857-489f-8115-2993e248f42c'
+        DOCKER_HUB_REPO = 'aashraf756/user-service'
+        IMAGE_TAG = "latest" // or use env.BUILD_NUMBER or another unique identifier
+    }
 
     stages {
         stage('Install Dependencies') {
@@ -20,14 +25,14 @@ pipeline {
         stage('Build Docker Image') {
              steps {
                  script {
-                     dockerImage = docker.build("your-image-name:latest")
+                     bat "docker build -t ${DOCKER_HUB_REPO}:${IMAGE_TAG} ."
                  }
              }
          }
          stage('Push Docker Image') {
              steps {
                  script {
-                     docker.withRegistry('https://index.docker.io/v1/', 'aba091eb-3857-489f-8115-2993e248f42c') {
+                     docker.withRegistry('', DOCKER_HUB_CREDENTIALS) {
                          dockerImage.push()
                      }
                  }
