@@ -33,7 +33,7 @@ pipeline {
              steps {
                  script {
                      docker.withRegistry('', DOCKER_HUB_CREDENTIALS) {
-                         dockerImage.push()
+                         bat "docker push ${DOCKER_HUB_REPO}:${IMAGE_TAG}"
                      }
                  }
              }
