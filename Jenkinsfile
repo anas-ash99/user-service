@@ -49,7 +49,7 @@ pipeline {
                 script {
                     // Configure AWS credentials
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
-                                    credentialsId: 'AWS_CREDENTIALS_ID']]) {
+                                    credentialsId: AWS_CREDENTIALS_ID]]) {
 
                         // Update kubeconfig to use the EKS cluster
                         bat """
