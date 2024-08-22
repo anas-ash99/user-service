@@ -1,11 +1,6 @@
 pipeline {
     agent any
-    environment {
-        DOCKER_REGISTRY = 'aashraf756'
-        IMAGE_NAME = 'user-service'
-        IMAGE_TAG = 'latest'
-        KUBE_CONFIG = credentials('kubeconfig') // If using Jenkins credentials plugin
-    }
+
 
     stages {
         stage('Install Dependencies') {
@@ -32,7 +27,7 @@ pipeline {
          stage('Push Docker Image') {
              steps {
                  script {
-                     docker.withRegistry('https://index.docker.io/v1/', 'docker-credentials-id') {
+                     docker.withRegistry('https://index.docker.io/v1/', 'aba091eb-3857-489f-8115-2993e248f42c') {
                          dockerImage.push()
                      }
                  }
