@@ -4,10 +4,12 @@ pipeline {
         // Replace these with your Docker Hub credentials and repository info
         DOCKER_HUB_CREDENTIALS = 'aba091eb-3857-489f-8115-2993e248f42c'
         DOCKER_HUB_REPO = 'aashraf756/user-service'
-        IMAGE_TAG = "latest" // or use env.BUILD_NUMBER or another unique identifier
+        IMAGE_TAG = "v1.0.3"
         AWS_REGION = 'eu-central-1'
         EKS_CLUSTER_NAME = 'meal-movers'
         AWS_CREDENTIALS_ID = 'fffabdc8-71cd-4530-9477-2eb9d487dc70'
+        DEPLOYMENT_NAME = 'user-service-deployment'
+        CONTAINER_NAME = 'user-service'
     }
 
     stages {
@@ -56,10 +58,9 @@ pipeline {
                             aws eks --region ${AWS_REGION} update-kubeconfig --name ${EKS_CLUSTER_NAME}
                         """
 
-                        // Apply Kubernetes manifests
+                        // Update Kubernetes deployment with new image
                         bat """
-                            kubectl apply -f deployment.yaml
-                            kubectl apply -f service.yaml
+                            kubectl set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${DOCKER_HUB_REPO}:${IMAGE_TAG}
                         """
                    }
                 }
