@@ -43,24 +43,15 @@ pipeline {
                  }
              }
          }
-        stage('Deploy to AWS EKS') {
+        stage('Deploy app') {
             steps {
                 echo 'Deploying application...'
                 script {
-                    // Configure AWS credentials
-                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
-                                    credentialsId: AWS_CREDENTIALS_ID]]) {
-
-                        // Update kubeconfig to use the EKS cluster
-                        bat """
-                            aws eks --region ${AWS_REGION} update-kubeconfig --name ${EKS_CLUSTER_NAME}
-                        """
-
-                        // Apply Kubernetes manifests
-                        bat """
-                            kubectl apply -f deployment.yaml
-                            kubectl apply -f service.yaml
-                        """
+                    // Apply Kubernetes manifests
+                    bat """
+                        kubectl apply -f deployment.yaml
+                        kubectl apply -f service.yaml
+                    """
                    }
                 }
             }

@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: user-service-deployment
 spec:
-  replicas: 3  # Number of replicas you want to run
+  replicas: 1  # Number of replicas (pods) you want to run
   selector:
     matchLabels:
       app: user-service
@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: aashraf756/user-service:latest
+          image: aashraf756/user-service:v1.0.4
           ports:
             - containerPort: 5000
