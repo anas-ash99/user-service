@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service-deployment
+  name: user-service
 spec:
   replicas: 1  # Number of replicas (pods) you want to run
   selector:
@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: aashraf756/user-service:v1.0.4
+          image: aashraf756/user-service:v1.0.6
           ports:
             - containerPort: 5000

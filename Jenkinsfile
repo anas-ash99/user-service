@@ -4,10 +4,7 @@ pipeline {
         // Replace these with your Docker Hub credentials and repository info
         DOCKER_HUB_CREDENTIALS = 'aba091eb-3857-489f-8115-2993e248f42c'
         DOCKER_HUB_REPO = 'aashraf756/user-service'
-        IMAGE_TAG = "latest" // or use env.BUILD_NUMBER or another unique identifier
-        AWS_REGION = 'eu-central-1'
-        EKS_CLUSTER_NAME = 'meal-movers'
-        AWS_CREDENTIALS_ID = 'fffabdc8-71cd-4530-9477-2eb9d487dc70'
+        IMAGE_TAG = "1.0.6" // or use env.BUILD_NUMBER or another unique identifier
     }
 
     stages {
@@ -51,7 +48,10 @@ pipeline {
                     bat """
                         kubectl apply -f deployment.yaml
                         kubectl apply -f service.yaml
+                        minikube service user-service
                     """
+
+
                    }
                 }
             }
