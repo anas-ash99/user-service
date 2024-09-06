@@ -47,6 +47,7 @@ pipeline {
                 script {
                     // Apply Kubernetes manifests
                     bat """
+                        kubectl config use-context minikube
                         kubectl apply -f deployment.yaml
                         kubectl apply -f service.yaml
                         minikube service user-service
