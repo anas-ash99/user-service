@@ -7,7 +7,7 @@ pipeline {
         IMAGE_TAG = "v1.0.4" // or use env.BUILD_NUMBER or another unique identifier
         MANIFEST_REPO = "https://github.com/anas-ash99/manifest"
         MANIFEST_REPO_NAME = "manifest"
-        DEPLOYMENT_FILE_PATH = "overlys\dev\user-service"
+        DEPLOYMENT_FILE_PATH = "overlys\\dev\\user-service"
     }
 
     stages {
@@ -52,7 +52,7 @@ pipeline {
                     bat """
                        git clone ${MANIFEST_REPO}
                        cd ${MANIFEST_REPO_NAME}
-                       (Get-Content -Path "${DEPLOYMENT_FILE_PATH }\deployment.yaml") -replace '${DOCKER_HUB_REPO}:${IMAGE_TAG}:.*', "${DOCKER_HUB_REPO}:${IMAGE_TAG}:${DEPLOYMENT_FILE_PATH }" | Set-Content -Path "\deployment.yaml"
+                       (Get-Content -Path "${DEPLOYMENT_FILE_PATH }\\deployment.yaml") -replace '${DOCKER_HUB_REPO}:${IMAGE_TAG}:.*', "${DOCKER_HUB_REPO}:${IMAGE_TAG}:${DEPLOYMENT_FILE_PATH }" | Set-Content -Path "${DEPLOYMENT_FILE_PATH }\\deployment.yaml"
                     """
                 }
             }
