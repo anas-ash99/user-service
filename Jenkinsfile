@@ -52,7 +52,11 @@ pipeline {
                     bat """
                        git pull
                        cd ${MANIFEST_REPO_NAME}
-                       (Get-Content -Path "${DEPLOYMENT_FILE_PATH}\\deployment.yaml") -replace '${DOCKER_HUB_REPO}:.*', "${DOCKER_HUB_REPO}:${IMAGE_TAG}" | Set-Content -Path "${DEPLOYMENT_FILE_PATH }\\deployment.yaml"
+                       powershell -Command "
+                                  \$filePath = '${DEPLOYMENT_FILE_PATH}\\deployment.yaml'
+                                  \$dockerImage = '${DOCKER_HUB_REPO}:${IMAGE_TAG}'
+                                  (Get-Content -Path \$filePath) -replace '${DOCKER_HUB_REPO}:.*', \$dockerImage | Set-Content -Path \$filePath
+                       "
                     """
                 }
             }
