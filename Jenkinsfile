@@ -4,7 +4,7 @@ pipeline {
         // Replace these with your Docker Hub credentials and repository info
         DOCKER_HUB_CREDENTIALS = 'aba091eb-3857-489f-8115-2993e248f42c'
         DOCKER_HUB_REPO = 'aashraf756/user-service'
-        IMAGE_TAG = "v1.0.4" // or use env.BUILD_NUMBER or another unique identifier
+        IMAGE_TAG = "v1.0.7" // or use env.BUILD_NUMBER or another unique identifier
         MANIFEST_REPO = "https://github.com/anas-ash99/manifest"
         MANIFEST_REPO_NAME = "manifest"
         DEPLOYMENT_FILE_PATH = "overlys\\dev\\user-service"
@@ -52,7 +52,7 @@ pipeline {
                     bat """
                        git clone ${MANIFEST_REPO}
                        cd ${MANIFEST_REPO_NAME}
-                       (Get-Content -Path "${DEPLOYMENT_FILE_PATH }\\deployment.yaml") -replace '${DOCKER_HUB_REPO}:${IMAGE_TAG}:.*', "${DOCKER_HUB_REPO}:${IMAGE_TAG}:${DEPLOYMENT_FILE_PATH }" | Set-Content -Path "${DEPLOYMENT_FILE_PATH }\\deployment.yaml"
+                       (Get-Content -Path "${DEPLOYMENT_FILE_PATH}\\deployment.yaml") -replace '${DOCKER_HUB_REPO}:.*', "${DOCKER_HUB_REPO}:${IMAGE_TAG}" | Set-Content -Path "${DEPLOYMENT_FILE_PATH }\\deployment.yaml"
                     """
                 }
             }
