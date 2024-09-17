@@ -50,7 +50,7 @@ pipeline {
                 script {
                     // Apply Kubernetes manifests
                     bat """
-                       git clone ${MANIFEST_REPO}
+                       git pull
                        cd ${MANIFEST_REPO_NAME}
                        (Get-Content -Path "${DEPLOYMENT_FILE_PATH}\\deployment.yaml") -replace '${DOCKER_HUB_REPO}:.*', "${DOCKER_HUB_REPO}:${IMAGE_TAG}" | Set-Content -Path "${DEPLOYMENT_FILE_PATH }\\deployment.yaml"
                     """
